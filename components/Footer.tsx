@@ -251,7 +251,7 @@ export const Footer = () => {
           <p>
             Design &amp; development by{" "}
             <a
-              href="https://github.com/skidev101"
+              href="https://monaski.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.creditLink}

@@ -25,7 +25,7 @@ export default function Hero() {
                   delay={130}
                   animateBy="words"
                   direction="top"
-                  className="text-cyan-700"
+                  className="text-blue-accent"
                 />
               </h1>
 
