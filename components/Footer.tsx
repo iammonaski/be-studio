@@ -1,13 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { FooterWaves } from "./FooterWaves";
 import {
   motion,
   useMotionTemplate,
-  useInView,
   useMotionValue,
   useReducedMotion,
   useSpring,
@@ -16,35 +14,10 @@ import type { PointerEvent } from "react";
 import { CALENDLY_URL } from "@/lib/calendly";
 import styles from "./Footer.module.css";
 
-const PatternWaves = dynamic(() => import("./PatternWaves"), { ssr: false });
-
 function FooterBackground() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isNear = useInView(ref, { margin: "800px", once: true });
-  const reduceMotion = useReducedMotion();
-
   return (
-    <div ref={ref} aria-hidden="true" className={styles.background}>
-      {isNear && (
-        <PatternWaves
-          preset="silk"
-          color="var(--blue-accent)"
-          backgroundColor="transparent"
-          spacing={10}
-          markSize={0.85}
-          depth={0.8}
-          shine={0.55}
-          contrast={1.1}
-          speed={0.18}
-          scale={1.25}
-          opacity={0.7}
-          fade="bottom"
-          fadeSize={0.65}
-          interactive={false}
-          intro={false}
-          paused={Boolean(reduceMotion)}
-        />
-      )}
+    <div aria-hidden="true" className={styles.background}>
+      <FooterWaves />
     </div>
   );
 }
