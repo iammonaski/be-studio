@@ -1,4 +1,4 @@
-const CALENDLY_URL = 'https://calendly.com/skidev101/30min'
+export const CALENDLY_URL = 'https://calendly.com/officialbegraphicstudio/30min'
 
 export function openCalendly() {
   if (typeof window === 'undefined') return

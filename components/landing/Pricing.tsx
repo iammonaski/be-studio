@@ -1,201 +1,192 @@
 "use client"
 
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { ArrowRight, TrendingUp, Target, Zap } from 'lucide-react'
+import { ArrowRight, TrendingUp, Target, Zap, Check } from 'lucide-react'
 import Link from 'next/link'
 import { BookCallButton } from '../BookCallButton'
 
+const goals = [
+  {
+    id: 'discover',
+    label: '01',
+    title: 'Discover',
+    subtitle: 'What Your Brand Needs',
+    icon: Zap,
+    description: 'Something is not working, but you need clarity before investing in a larger engagement.',
+    investment: '₦150,000',
+    investmentLabel: 'Starting from',
+    services: ['Brand audit', 'Market & competitor review', 'Recommended next steps'],
+    outcome: 'Clarity for your next move',
+  },
+  {
+    id: 'build',
+    label: '02',
+    title: 'Build',
+    subtitle: 'Your Brand Properly',
+    icon: TrendingUp,
+    description: 'You need a strategic brand foundation that can support the next stage of growth.',
+    investment: '₦500,000',
+    investmentLabel: 'Starting from',
+    services: ['Strategy & positioning', 'Communication & identity', 'Brand systems & launch guidance'],
+    outcome: 'A foundation built for growth',
+    recommended: true,
+  },
+  {
+    id: 'evolve',
+    label: '03',
+    title: 'Evolve',
+    subtitle: 'Your Existing Brand',
+    icon: Target,
+    description: 'Your business has changed and your brand needs to catch up.',
+    investment: '₦450,000',
+    investmentLabel: 'Starting from',
+    services: ['Existing brand audit', 'Strategic & visual evolution', 'Rollout support'],
+    outcome: 'A brand aligned with where you\'re going',
+  },
+]
+
+const stats = [
+  { stat: '87%', label: 'Client satisfaction' },
+  { stat: '3–5×', label: 'Average ROI in 12 months' },
+  { stat: '50+', label: 'Brands transformed' },
+]
+
 const Pricing = () => {
   const [selectedGoal, setSelectedGoal] = useState<string>('discover')
-
-  const goals = [
-    {
-      id: 'discover',
-      title: 'Discover What Your Brand Needs',
-      icon: Zap,
-      description: 'Something is not working, but you need clarity before investing in a larger engagement',
-      investment: 'From ₦150,000',
-      services: ['Brand audit', 'Market and competitor review', 'Recommended next steps'],
-      roi: 'Clarity for your next move',
-      timeline: 'Scoped to your needs',
-    },
-    {
-      id: 'build',
-      title: 'Build Your Brand Properly',
-      icon: TrendingUp,
-      description: 'You need a strategic brand foundation that can support the next stage of growth',
-      investment: 'From ₦500,000',
-      services: ['Strategy and positioning', 'Communication and identity', 'Brand systems and launch guidance'],
-      roi: 'A foundation built for growth',
-      timeline: 'Scoped to your needs',
-      recommended: true,
-    },
-    {
-      id: 'evolve',
-      title: 'Evolve Your Existing Brand',
-      icon: Target,
-      description: 'Your business has changed and your brand needs to catch up',
-      investment: 'From ₦450,000',
-      services: ['Existing brand audit', 'Strategic and visual evolution', 'Rollout support'],
-      roi: 'A brand aligned with where you are going',
-      timeline: 'Scoped to your needs',
-    },
-  ]
-
   const selected = goals.find(g => g.id === selectedGoal) || goals[0]
-  const Icon = selected.icon
 
   return (
-    <section className="py-20 md:py-32 bg-slate-50">
-      <div className="mx-auto max-w-7xl px-4 lg:px-6">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="font-heading text-3xl md:text-5xl font-bold text-[#0B1C2D]">
-            Where does your brand need to go?
+    <section className="py-24 md:py-36 bg-white">
+      <div className="mx-auto max-w-6xl px-6">
+
+        {/* ── Header ── */}
+        <div className="max-w-2xl">
+          <p className="text-xs font-semibold uppercase tracking-widest text-blue-accent mb-4">Investment</p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold leading-tight text-[#0B1C2D]">
+            Where does your brand<br className="hidden md:block" /> need to go?
           </h2>
-          <p className="mt-6 text-base md:text-lg text-[#4B5C73]">
-            Every business is at a different stage. Whether you're starting from scratch, evaluating an existing brand, or looking to evolve, we'll help you identify the right starting point.
+          <p className="mt-5 text-sm md:text-base text-[#4B5C73] leading-relaxed max-w-xl">
+            Every business is at a different stage. We'll help you find the right starting point.
           </p>
         </div>
 
-        {/* Goal Selector */}
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {goals.map((goal) => {
-            const GoalIcon = goal.icon
-            return (
-              <button
-                key={goal.id}
-                onClick={() => setSelectedGoal(goal.id)}
-                className={`group relative rounded-[2rem] p-6 text-left transition-all hover:cursor-pointer ${
-                  selectedGoal === goal.id
-                    ? 'bg-blue-accent text-white shadow-xl shadow-blue-200 ring-4 ring-blue-200'
-                    : 'bg-white hover:bg-white/40 border-2 border-slate-200 hover:border-blue-accent hover:shadow-lg transition-all'
-                }`}
-              >
-                {goal.recommended && selectedGoal !== goal.id && (
-                  <div className="absolute -top-3 right-4 rounded-full bg-blue-accent px-3 py-1 text-xs font-semibold text-white shadow-lg">
-                    Recommended
-                  </div>
-                )}
-                
-                <GoalIcon className={`h-8 w-8 ${
-                  selectedGoal === goal.id ? 'text-white' : 'text-blue-accent'
-                }`} />
-                
-                <h3 className={`mt-4 text-lg font-bold ${
-                  selectedGoal === goal.id ? 'text-white' : 'text-[#0B1C2D]'
-                }`}>
-                  {goal.title}
-                </h3>
-                
-                <p className={`mt-2 text-sm ${
-                  selectedGoal === goal.id ? 'text-blue-100' : 'text-[#4B5C73]'
-                }`}>
-                  {goal.description}
-                </p>
-              </button>
-            )
-          })}
+        {/* ── Selector Tabs ── */}
+        <div className="mt-14 flex flex-col sm:flex-row gap-3">
+          {goals.map((goal) => (
+            <button
+              key={goal.id}
+              onClick={() => setSelectedGoal(goal.id)}
+              className={`relative flex-1 text-left px-5 py-4 rounded-2xl border transition-all duration-200 hover:cursor-pointer group ${
+                selectedGoal === goal.id
+                  ? 'bg-[#0B1C2D] border-[#0B1C2D] text-white'
+                  : 'bg-white border-slate-200 text-[#0B1C2D] hover:border-slate-400'
+              }`}
+            >
+              {goal.recommended && selectedGoal !== goal.id && (
+                <span className="absolute -top-2.5 right-3 rounded-full bg-blue-accent px-2.5 py-0.5 text-[10px] font-semibold text-white tracking-wide">
+                  Popular
+                </span>
+              )}
+              <span className={`block text-[10px] font-semibold tracking-widest uppercase mb-1 ${selectedGoal === goal.id ? 'text-slate-400' : 'text-slate-400'}`}>
+                {goal.label}
+              </span>
+              <span className={`block text-base font-bold ${selectedGoal === goal.id ? 'text-white' : 'text-[#0B1C2D]'}`}>
+                {goal.title}
+              </span>
+              <span className={`block text-xs mt-0.5 ${selectedGoal === goal.id ? 'text-slate-300' : 'text-[#4B5C73]'}`}>
+                {goal.subtitle}
+              </span>
+            </button>
+          ))}
         </div>
 
-        {/* Selected Goal Details */}
-        <div className="mt-12 rounded-[2rem] bg-white p-6 lg:p-8 md:p-12 shadow-md border-2 border-slate-200">
-          <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 items-center">
-            {/* Left: Investment Details */}
-            <div>
-              <div className="inline-flex items-center gap-3 rounded-full bg-blue-50 px-4 py-2">
-                <Icon className="h-4 w-4 text-blue-accent/80" />
-                <span className="text-xs lg:text-sm font-semibold text-blue-accent/80">{selected.title}</span>
-              </div>
-              
-              <div className="mt-6">
-                <p className="text-sm text-[#8A99AD]">Typical Investment</p>
-                <p className="font-heading mt-2 text-4xl font-bold text-blue-accent">{selected.investment}</p>
-              </div>
+        {/* ── Detail Panel ── */}
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
 
-              <div className="mt-6 grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-[#8A99AD]">Expected ROI</p>
-                  <p className="mt-1 text-lg font-semibold text-[#0B1C2D]">{selected.roi}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-[#8A99AD]">Timeline</p>
-                  <p className="mt-1 text-lg font-semibold text-[#0B1C2D]">{selected.timeline}</p>
-                </div>
+          {/* Left — Scope */}
+          <div className="lg:col-span-3 border border-slate-200 rounded-3xl p-8 md:p-10 bg-white">
+            <div className="flex items-start justify-between gap-4 flex-wrap">
+              <div>
+                <p className="text-xs text-slate-400 uppercase tracking-widest">{selected.investmentLabel}</p>
+                <p className="font-heading text-4xl font-bold text-[#0B1C2D] mt-1">{selected.investment}</p>
               </div>
-
-              <div className="mt-8">
-                <p className="text-sm font-semibold text-[#0B1C2D] mb-3">What's included:</p>
-                <ul className="space-y-2">
-                  {selected.services.map((service) => (
-                    <li key={service} className="flex items-center gap-3">
-                      <div className="h-1.5 w-1.5 rounded-full bg-blue-accent" />
-                      <span className="text-[#4B5C73]">{service}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-[#4B5C73]">
+                Scoped to your needs
+              </span>
             </div>
 
-            {/* Right: CTA */}
-            <div className="rounded-[2rem] bg-linear-to-br from-blue-accent to-cyan-600 p-6 lg:p-8 text-white">
-              <h3 className="text-2xl font-bold">Ready to build a stronger brand?</h3>
-              <p className="mt-4 text-blue-100">
-                You don't need to have everything figured out before getting started. Tell us about your business, where you are, and what you're looking to achieve. We'll help you understand what your brand needs and determine the right way forward.
-              </p>
-              
-              <div className="flex flex-col mt-6 space-y-2">
-                {/* <Link href="#contact">
-                  <Button 
-                    size="sm"
-                    className="text-xs lg:text-sm w-full rounded-full bg-white font-semibold text-blue-700 hover:bg-blue-50"
-                  >
-                    Book free consultation
-                    <ArrowRight className="hidden md:block ml-2 h-5 w-5 font-semibold" />
-                  </Button>
-                </Link> */}
-                <BookCallButton className='text-center bg-blue-50'/>
-                
-                <Link href="#services">
-                  <Button 
-                    size="sm"
-                    variant="outline"
-                    className="text-xs lg:text-sm w-full rounded-full border-2 border-white/30 bg-white/10 text-white hover:text-white/90 hover:bg-white/30"
-                  >
-                    View all services
-                  </Button>
-                </Link>
-              </div>
+            <p className="mt-6 text-[#4B5C73] text-sm leading-relaxed border-t border-slate-100 pt-6">
+              {selected.description}
+            </p>
 
-              <p className="mt-6 text-xs text-blue-200 text-center">
-                Scope flexibility • Flexible payment plans available
+            <ul className="mt-6 space-y-3">
+              {selected.services.map((service) => (
+                <li key={service} className="flex items-center gap-3 text-sm text-[#0B1C2D]">
+                  <span className="flex-shrink-0 h-5 w-5 rounded-full bg-blue-50 flex items-center justify-center">
+                    <Check className="h-3 w-3 text-blue-accent" />
+                  </span>
+                  {service}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 pt-6 border-t border-slate-100">
+              <p className="text-xs text-slate-400 uppercase tracking-widest">Outcome</p>
+              <p className="mt-1 text-base font-semibold text-[#0B1C2D]">{selected.outcome}</p>
+            </div>
+          </div>
+
+          {/* Right — CTA */}
+          <div className="lg:col-span-2 bg-[#0B1C2D] rounded-3xl p-8 md:p-10 flex flex-col justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">Ready to start?</p>
+              <h3 className="text-2xl font-bold text-white leading-snug">
+                Let's build a brand that works.
+              </h3>
+              <p className="mt-4 text-sm text-slate-400 leading-relaxed">
+                You don't need everything figured out. Tell us where you are, and we'll map the path forward together.
+              </p>
+            </div>
+
+            <div className="mt-10 flex flex-col gap-3">
+              <BookCallButton
+                className="w-full text-center justify-center bg-blue-accent! hover:bg-blue-accent/85! text-sm"
+                text="Book a discovery call"
+              />
+              <Link href="#services" className="w-full">
+                <button className="w-full text-sm text-slate-400 hover:text-white border border-white/10 rounded-full px-4 py-2 transition-colors hover:border-white/30 hover:cursor-pointer">
+                  View all services <ArrowRight className="inline h-3.5 w-3.5 ml-1" />
+                </button>
+              </Link>
+              <p className="text-center text-[11px] text-slate-500 mt-2">
+                Scope flexibility · Flexible payment plans
               </p>
             </div>
           </div>
         </div>
 
-        {/* Social Proof */}
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {[
-            { stat: '87%', label: 'Client satisfaction rate' },
-            { stat: '3-5x', label: 'Average ROI in 12 months' },
-            { stat: '50+', label: 'Brands transformed' },
-          ].map((item) => (
-            <div key={item.label} className="rounded-[2rem] bg-white p-6 text-center border-2 border-slate-200">
-              <div className="font-heading text-3xl lg:text-4xl font-bold text-blue-accent">{item.stat}</div>
-              <p className="mt-2 text-sm text-[#4B5C73]">{item.label}</p>
+        {/* ── Stats ── */}
+        <div className="mt-10 grid grid-cols-3 divide-x divide-slate-200 border border-slate-200 rounded-2xl overflow-hidden">
+          {stats.map((item) => (
+            <div key={item.label} className="py-6 px-4 md:px-8 text-center bg-white">
+              <p className="font-heading text-2xl md:text-3xl font-bold text-[#0B1C2D]">{item.stat}</p>
+              <p className="mt-1.5 text-xs md:text-sm text-[#4B5C73]">{item.label}</p>
             </div>
           ))}
         </div>
 
-          {/* Uncertain */}
-        <div className="mt-12 rounded-[2rem] bg-blue-50 border-2 border-blue-200 p-6 text-center">
-          <p className="text-[#4B5C73] pb-4">
-            <span className="font-semibold text-[#0B1C2D]">Not sure which tier fits?</span> Schedule a free 30-minute consultation and we'll help you find the right starting point.
+        {/* ── Bottom Banner ── */}
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-200 rounded-2xl px-7 py-5 bg-white">
+          <p className="text-sm text-[#4B5C73] text-center sm:text-left">
+            <span className="font-semibold text-[#0B1C2D]">Not sure which path is right?</span>{' '}
+            Book a free 30-min call — no commitment needed.
           </p>
-          <BookCallButton className='text-center'/>
+          <BookCallButton
+            text="Let's talk"
+            className="flex-shrink-0 text-sm"
+          />
         </div>
+
       </div>
     </section>
   )

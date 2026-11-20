@@ -2,25 +2,24 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "../ui/button"
-import { Pill } from "../Pill"
+import { ArrowRight, BarChart2, Compass, Layers, RefreshCw, TrendingUp, Zap } from "lucide-react"
 
 type Service = {
   title: string
+  tagline: string
   description: string
   items: string[]
   featured?: boolean
   slug: string
+  icon: React.ElementType
 }
-
 
 const services: Service[] = [
   {
     title: "Full Brand Build",
+    tagline: "Flagship Service",
     description:
-      "A comprehensive branding engagement for businesses looking to establish a strong brand foundation or build a more complete brand system.",
+      "A comprehensive engagement for businesses looking to establish a strong brand foundation or build a complete brand system from the ground up.",
     items: [
       "Brand Analysis & Strategic Direction",
       "Positioning, Communication & Visual Identity",
@@ -28,162 +27,194 @@ const services: Service[] = [
     ],
     featured: true,
     slug: "full-brand-build",
+    icon: Zap,
   },
   {
     title: "Brand Analysis",
+    tagline: "Clarity First",
     description:
-      "Understand where your brand currently stands, how it is perceived, and where there are opportunities to improve.",
+      "Understand where your brand stands, how it is perceived, and where there are opportunities to improve.",
     items: [
       "Brand Audit & Market Review",
       "Competitor & Audience Analysis",
-      "Brand Strengths, Gaps & Recommendations",
+      "Strengths, Gaps & Recommendations",
     ],
     slug: "brand-analysis",
+    icon: BarChart2,
   },
   {
     title: "Brand Strategy",
+    tagline: "Define Your Direction",
     description:
-      "Establish a clear direction for your brand, defining what it stands for, who it serves, and how it should communicate its value.",
+      "Establish a clear direction for your brand — what it stands for, who it serves, and how it communicates its value.",
     items: [
-      "Brand Purpose, Vision, Mission & Values",
+      "Purpose, Vision, Mission & Values",
       "Audience, Value Proposition & Positioning",
       "Messaging Framework & Brand Voice",
     ],
     slug: "brand-strategy",
+    icon: Compass,
   },
   {
     title: "Brand Identity System",
+    tagline: "Look the Part",
     description:
-      "Translate your brand's strategy and positioning into a distinctive visual identity that communicates its character and creates consistency.",
+      "Translate strategy into a distinctive visual identity that communicates your brand's character and creates consistency.",
     items: [
       "Logo System (Primary, Secondary & Icon)",
       "Colour Palette & Typography System",
-      "Graphic Language, Brand Assets & Guidelines",
+      "Graphic Language, Assets & Guidelines",
     ],
     slug: "brand-identity-system",
+    icon: Layers,
   },
   {
-    title: "Brand Repositioning / Rebrand",
+    title: "Brand Repositioning",
+    tagline: "Evolve & Grow",
     description:
-      "Help established businesses evolve their brands to reflect changes in their direction, offerings, audience, or market position.",
+      "Help established businesses evolve their brand to reflect changes in direction, offerings, audience, or market position.",
     items: [
       "Current Brand & Positioning Review",
-      "Strategic Repositioning & Messaging Refinement",
+      "Strategic Repositioning & Messaging",
       "Visual Identity Evolution & Rollout",
     ],
     slug: "brand-repositioning",
+    icon: RefreshCw,
   },
   {
     title: "Brand Growth Assets",
+    tagline: "Scale Consistently",
     description:
-      "Develop practical brand applications and creative systems that help your business communicate and maintain consistency across marketing touchpoints.",
+      "Practical brand applications and creative systems that help your business stay consistent across every marketing touchpoint.",
     items: [
       "Social Media Design Systems",
       "Marketing & Campaign Templates",
       "Pitch Decks & Presentation Templates",
     ],
     slug: "brand-growth-assets",
+    icon: TrendingUp,
   },
-];
-
+]
 
 export function Services() {
+  const [featured, ...rest] = services
+
   return (
-    <section className="relative bg-white py-32 md:py-40 overflow-hidden" id="services">
-      {/* Very subtle background texture/gradient */}
-      <div className="absolute inset-0 bg-linear-to-b from-slate-50/40 to-transparent pointer-events-none" />
+    <section className="bg-white py-24 md:py-36" id="services">
+      <div className="mx-auto max-w-6xl px-6">
 
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mx-auto max-w-3xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="w-full flex justify-center">
+        {/* ── Header ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl"
+        >
+          <p className="text-xs font-semibold uppercase tracking-widest text-blue-accent mb-4">Core Services</p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold leading-tight text-[#0B1C2D]">
+            Branding built around<br className="hidden md:block" /> what you need.
+          </h2>
+          <p className="mt-5 text-sm md:text-base text-[#4B5C73] leading-relaxed max-w-xl">
+            From understanding your business to building its identity and scaling its presence — every service we offer is designed to work together.
+          </p>
+        </motion.div>
 
-            <Pill text="Core Services" />
-            </div>
-
-            <h2 className="font-heading mt-6 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
-              Branding services built around what your business needs.
-            </h2>
-
-            <p className="mt-6 text-base lg:text-lg leading-relaxed text-slate-600 max-w-2xl mx-auto">
-              From understanding your business to developing its identity and creating systems for consistency, we bring the essential elements of branding together to help you build a stronger brand.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Cards grid */}
-        <div className="mt-16 md:mt-24 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
-          {services.map((service, i) => (
-            <motion.div
-              key={service.slug}
-              custom={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ delay: i * 0.1 }}
-              className={cn(
-                "group relative flex flex-col rounded-[2rem] border p-7 md:p-8 transition-all duration-400",
-                service.featured
-                  ? "border-blue-200 bg-linear-to-b from-blue-50/70 to-white shadow-blue-100/70"
-                  : "border-slate-100 bg-white/80 shadow-sm hover:shadow-md hover:border-slate-200",
-                "backdrop-blur-sm lg:hover:-translate-y-2 lg:focus-within:-translate-y-2"
-              )}
-            >
-              {service.featured && (
-                <div className="absolute -top-3 right-6 rounded-full bg-blue-accent px-4 py-1 text-xs font-bold tracking-wide text-white shadow-md">
-                  Flagship Service
+        {/* ── Featured Card ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-14"
+        >
+          <Link href={`/services/${featured.slug}`} className="group block">
+            <div className="relative grid grid-cols-1 lg:grid-cols-5 gap-0 rounded-3xl border border-slate-200 bg-[#0B1C2D] overflow-hidden transition-all duration-300 hover:border-slate-300">
+              {/* Left */}
+              <div className="lg:col-span-3 p-8 md:p-10 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-white/60">
+                      <featured.icon className="h-3 w-3" />
+                      {featured.tagline}
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-2xl md:text-3xl font-bold text-white leading-tight">
+                    {featured.title}
+                  </h3>
+                  <p className="mt-4 text-base text-slate-400 leading-relaxed max-w-md">
+                    {featured.description}
+                  </p>
                 </div>
-              )}
-
-              <div className="flex-1">
-                <h3 className="text-xl md:text-2xl font-semibold text-slate-900 tracking-tight">
-                  {service.title}
-                </h3>
-
-                <p className="mt-4 text-base leading-relaxed text-slate-600">
-                  {service.description}
-                </p>
-
-                <ul className="mt-7 space-y-3">
-                  {service.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start text-sm text-slate-600"
-                    >
-                      <span className="mr-3 mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500/70" />
+                <div className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-white group-hover:gap-3 transition-all">
+                  Explore service <ArrowRight className="h-4 w-4" />
+                </div>
+              </div>
+              {/* Right */}
+              <div className="lg:col-span-2 border-t lg:border-t-0 lg:border-l border-white/10 p-8 md:p-10 bg-white/5 flex flex-col justify-center">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-500 mb-5">What's included</p>
+                <ul className="space-y-4">
+                  {featured.items.map((item, j) => (
+                    <li key={j} className="flex items-start gap-3 text-sm text-slate-300">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-accent" />
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
+            </div>
+          </Link>
+        </motion.div>
 
-              <div className="mt-8">
-                <Button
-                  asChild
-                  className={cn(
-                    "group/btn inline-flex items-center gap-2 px-4! text-sm font-medium",
-                    service.featured ? "text-blue-accent" : "text-slate-700",
-                    "transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-full bg-gray-100 hover:bg-purple-accent hover:text-white"
-                  )}
-                >
-                  <Link href={`/services/${service.slug}`}>
-                    Explore service
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform duration-300 group-hover/btn:translate-x-1"
-                    />
-                  </Link>
-                </Button>
-              </div>
-            </motion.div>
-          ))}
+        {/* ── Service Grid ── */}
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {rest.map((service, i) => {
+            const Icon = service.icon
+            return (
+              <motion.div
+                key={service.slug}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+              >
+                <Link href={`/services/${service.slug}`} className="group flex flex-col h-full rounded-3xl border border-slate-200 bg-white p-7 md:p-8 transition-all duration-300 hover:border-[#0B1C2D]">
+                  <div className="flex items-start justify-between gap-4 mb-6">
+                    <div className="h-10 w-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-[#0B1C2D] group-hover:border-[#0B1C2D]">
+                      <Icon className="h-4.5 w-4.5 text-blue-accent transition-colors duration-300 group-hover:text-white" strokeWidth={1.75} />
+                    </div>
+                    <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 pt-1">{service.tagline}</span>
+                  </div>
+
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-[#0B1C2D] leading-snug">
+                      {service.title}
+                    </h3>
+                    <p className="mt-3 text-sm text-[#4B5C73] leading-relaxed">
+                      {service.description}
+                    </p>
+                    <ul className="mt-5 space-y-2">
+                      {service.items.map((item) => (
+                        <li key={item} className="flex items-start gap-2.5 text-xs text-[#4B5C73]">
+                          <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#0B1C2D]/30 transition-colors duration-300 group-hover:bg-[#0B1C2D]" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-xs font-semibold text-[#0B1C2D]">
+                      Explore service
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#0B1C2D]" />
+                  </div>
+                </Link>
+              </motion.div>
+            )
+          })}
         </div>
+
       </div>
     </section>
   )

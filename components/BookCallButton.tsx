@@ -1,9 +1,16 @@
-'use client'
+"use client";
 
-export function BookCallButton({className, text, children}: {className?: string, text?: string, children?: React.ReactNode}) {
-  const CALENDLY_URL = 'https://calendly.com/skidev101/30min'
-  
+import { CALENDLY_URL } from "@/lib/calendly";
 
+export function BookCallButton({
+  className,
+  text,
+  children,
+}: {
+  className?: string;
+  text?: string;
+  children?: React.ReactNode;
+}) {
   return (
     <a
       href={CALENDLY_URL}
@@ -14,5 +21,5 @@ export function BookCallButton({className, text, children}: {className?: string,
       {text ? text : "Book an appointment"}
       {children && children}
     </a>
-  )
+  );
 }
