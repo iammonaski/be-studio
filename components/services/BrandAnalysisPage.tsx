@@ -1,196 +1,200 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { BookCallButton } from "@/components/BookCallButton";
+import { DarkCTA } from "@/components/DarkCTA";
+import { SectionEyebrow } from "@/components/services/SectionEyebrow";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   ArrowRight,
-  CheckCircle2,
   BarChart3,
+  CheckCircle2,
+  MessageCircle,
   Target,
-  Zap,
-  Users,
   TrendingUp,
-  Shield,
+  Users,
+  Zap,
 } from "lucide-react";
-import { BookCallButton } from "../BookCallButton";
-import { useRouter } from "next/navigation";
+
+const fadeUp = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.45, ease: "easeOut" as const },
+};
 
 const BrandAnalysisPage = () => {
-  const router = useRouter();
-
   const approachSteps = [
     {
       icon: BarChart3,
-      title: "Research & Discovery",
-      desc: "Deep-dive competitive analysis, customer perception surveys, and market positioning assessment across 15+ key metrics.",
-      timeline: "Week 1-2",
+      title: "Understand",
+      tag: "Brand audit",
+      desc: "Your business, audience, market, and how your brand is perceived today.",
     },
     {
       icon: Target,
-      title: "Comprehensive Brand Audit",
-      desc: "Systematic evaluation of visual identity, messaging frameworks, customer touchpoints, and brand consistency across all channels.",
-      timeline: "Week 2-3",
+      title: "Review",
+      tag: "Market & competitor review",
+      desc: "Competitor and audience analysis to see where there are opportunities to improve.",
     },
     {
       icon: TrendingUp,
-      title: "Strategic Roadmap",
-      desc: "Actionable recommendations with prioritized initiatives, implementation timelines, and measurable success metrics.",
-      timeline: "Week 4",
+      title: "Recommend",
+      tag: "Recommended next steps",
+      desc: "Strengths, gaps, and recommendations — clarity for your next move.",
     },
   ];
 
   const deliverables = [
-    { icon: CheckCircle2, text: "60+ page comprehensive brand audit report" },
-    {
-      icon: CheckCircle2,
-      text: "Competitive landscape analysis with 10+ competitors",
-    },
-    {
-      icon: CheckCircle2,
-      text: "Stakeholder perception interviews & synthesis",
-    },
-    {
-      icon: CheckCircle2,
-      text: "Brand architecture & positioning recommendations",
-    },
-    { icon: CheckCircle2, text: "90-day strategic implementation roadmap" },
-    { icon: CheckCircle2, text: "Executive presentation & workshop session" },
+    "Brand Audit & Market Review",
+    "Competitor & Audience Analysis",
+    "Strengths, Gaps & Recommendations",
   ];
 
   const idealClients = [
     {
+      icon: TrendingUp,
+      title: "Growing businesses",
+      desc: "Building a stronger brand with room to grow into the next stage.",
+    },
+    {
       icon: Zap,
-      title: "Pre-Rebrand Businesses",
-      desc: "Companies investing $50K+ in rebranding who need strategic foundation before execution.",
+      title: "Startups & early-stage founders",
+      desc: "Laying a clear foundation before investing in a larger brand engagement.",
     },
     {
       icon: Users,
-      title: "Series A+ Startups",
-      desc: "Fast-growing companies transitioning from founder-led to professional brand management.",
-    },
-    {
-      icon: Shield,
-      title: "Established Brands",
-      desc: "Organizations experiencing messaging drift, positioning confusion, or market disruption.",
+      title: "Established companies",
+      desc: "Improving or evolving a brand as direction, audience, or market changes.",
     },
   ];
 
   const stats = [
-    { value: "87%", label: "Client satisfaction rate" },
-    { value: "3-5x", label: "Average ROI in 12 months" },
-    { value: "50+", label: "Brands analyzed annually" },
+    { value: "87%", label: "Client satisfaction" },
+    { value: "3–5×", label: "Average ROI in 12 months" },
+    { value: "50+", label: "Brands transformed" },
+  ];
+
+  const problemPoints = [
+    {
+      stat: "Clarity",
+      desc: "Something is not working, but you need clarity before investing in a larger engagement.",
+    },
+    {
+      stat: "Direction",
+      desc: "Every decision is intentional — grounded in your goals, audience, and long-term vision, not trends alone.",
+    },
+    {
+      stat: "Perception",
+      desc: "Businesses need to clearly communicate who they are, what they stand for, and how they want to be perceived.",
+    },
   ];
 
   return (
-    <main className="min-h-screen">
+    <div className="bg-white">
       {/* HERO */}
-      <section className="relative overflow-hidden bg-linear-to-br from-dark-accent via-cyan-900 to-dark-accent">
-        {/* <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-40"></div> */}
+      <section className="relative isolate overflow-hidden bg-dark-accent text-white">
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(35,187,211,0.22),transparent_55%)]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.15] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA2KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"
+        />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-32">
+        <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-12 sm:px-8 md:pt-24 md:pb-16">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="inline-flex items-center gap-2 rounded-full bg-blue-accent/10 px-4 py-2 text-sm font-medium text-blue-300 border border-blue-accent/20 backdrop-blur-sm"
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.05 }}
+            className="inline-flex items-center gap-2 rounded-full border border-blue-accent/30 bg-blue-accent/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-200"
           >
-            <Zap className="h-4 w-4" />
-            Brand Analysis & Strategy
+            <Zap className="size-3.5" aria-hidden />
+            Clarity First
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="font-heading mt-6 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-tight"
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.12 }}
+            className="font-heading mt-6 max-w-4xl text-[2.6rem] leading-[1.08] font-bold tracking-tight sm:text-5xl md:text-6xl"
           >
-            Stop Guessing.
+            Understand where
             <br />
-            <span className="text-blue-accent">Start Knowing.</span>
+            <span className="text-blue-accent">your brand stands.</span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-slate-300"
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.19 }}
+            className="mt-6 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base md:text-lg"
           >
-            Data-driven brand analysis that reveals how customers truly perceive
-            you, where competitors are winning, and the exact positioning gaps
-            costing you growth.
+            Understand where your brand stands, how it is perceived, and where
+            there are opportunities to improve.
           </motion.p>
 
-          <div className="mt-12 flex flex-wrap gap-4">
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.26 }}
+            className="mt-8"
+          >
             <Button
-              onClick={() => router.push("/contact")}
+              asChild
               size="lg"
-              className="group rounded-full bg-blue-accent/80 hover:bg-blue-accent/90 text-white px-6! md:px-8 md:py-6 hover:px-8! text-base md:text-lg font-black transition-all duration-200"
+              className="group h-12 rounded-full bg-blue-accent px-7 text-sm font-bold text-white shadow-lg shadow-blue-accent/20 hover:bg-[#3ac8dd]"
             >
-              Get Brand Assessment
-              <ArrowRight className="group-hover:translate-x-2 ml-2 size-5 duration-200" />
+              <Link href="/contact">
+                Book a discovery call
+                <ArrowRight
+                  className="size-4 transition-transform duration-200 group-hover:translate-x-1"
+                  aria-hidden
+                />
+              </Link>
             </Button>
-            {/* <Button
-              size="lg"
-              variant="outline"
-              className="rounded-full border-2 border-white/20 bg-white/5 backdrop-blur-sm text-white hover:bg-white/10 px-8 py-6 text-lg"
-            >
-              View Sample Report
-            </Button> */}
-          </div>
+          </motion.div>
 
-          {/* Stats */}
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/10 pt-12">
+          <div className="mt-12 grid grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/5 px-1 py-5 backdrop-blur-sm sm:px-6">
             {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="font-heading text-3xl md:text-4xl font-bold text-white">
+              <div key={stat.label} className="px-1 text-center sm:px-4">
+                <div className="font-heading text-xl font-bold sm:text-2xl md:text-3xl">
                   {stat.value}
                 </div>
-                <div className="mt-2 text-sm text-slate-400">{stat.label}</div>
+                <div className="mx-auto mt-1 max-w-30 text-[10px] leading-snug text-slate-400 sm:text-xs">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* PROBLEM */}
-      <section className="py-20 md:py-32 bg-white">
-        <div className="mx-auto max-w-4xl px-4 md:px-6">
-          <div className="text-center">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-slate-900">
-              The <span className="text-blue-accent">$2.3M</span> Question Most
-              Brands Can't Answer
+      {/* WHY ANALYSIS */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow>Why start here</SectionEyebrow>
+            <h2 className="font-heading mt-3 text-[1.75rem] leading-tight font-bold tracking-tight text-slate-900 sm:text-3xl md:text-[2.6rem]">
+              Branding goes beyond how your business looks.
             </h2>
-            <p className="mt-8 text-base md:text-lg leading-relaxed text-slate-600">
-              That's the average revenue impact of misaligned brand positioning.
-              Without rigorous analysis, you're making million-dollar decisions
-              based on assumptions, not evidence.
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+              At BE Graphic Studio, we believe building a strong brand takes
+              more than good design. It requires a clear understanding of your
+              business, a defined position, purposeful communication, and a
+              visual identity that brings everything together.
             </p>
           </div>
 
-          <div className="mt-16 grid gap-6 sm:grid-cols-3">
-            {[
-              {
-                stat: "68%",
-                desc: "of CMOs admit they lack clear brand positioning data",
-              },
-              {
-                stat: "3.2x",
-                desc: "higher customer acquisition costs from inconsistent messaging",
-              },
-              {
-                stat: "43%",
-                desc: "revenue lost to better-positioned competitors",
-              },
-            ].map((item) => (
+          <div className="mt-10 grid gap-4 sm:grid-cols-3 md:gap-6">
+            {problemPoints.map((item) => (
               <div
-                key={item.desc}
-                className="rounded-2xl bg-slate-50 p-8 border border-slate-200"
+                key={item.stat}
+                className="rounded-2xl border border-slate-200 bg-slate-50/70 p-5 transition-colors hover:border-blue-accent/40 hover:bg-blue-accent/5 md:p-7"
               >
-                <div className="font-heading text-3xl font-bold text-blue-accent">
+                <div className="font-heading text-xl font-bold text-cyan-700 md:text-2xl">
                   {item.stat}
                 </div>
-                <p className="mt-3 text-slate-600">{item.desc}</p>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -198,44 +202,48 @@ const BrandAnalysisPage = () => {
       </section>
 
       {/* APPROACH */}
-      <section className="py-20 md:py-32 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-slate-900">
-              Our Proven Methodology
+      <section className="border-y border-slate-200/70 bg-slate-50 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow>How we work</SectionEyebrow>
+            <h2 className="font-heading mt-3 text-[1.75rem] leading-tight font-bold tracking-tight text-slate-900 sm:text-3xl md:text-[2.6rem]">
+              Build the brand your business actually needs.
             </h2>
-            <p className="mt-6 text-base md:text-lg text-slate-600">
-              A systematic 4-week process combining quantitative research,
-              qualitative insights, and strategic frameworks used by Fortune 500
-              brands.
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+              We start by understanding your business and how it is perceived.
+              That guides what needs to change, from positioning and messaging
+              to identity and the systems that keep it consistent.
             </p>
           </div>
 
-          <div className="mt-20 grid gap-8 lg:grid-cols-3">
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
             {approachSteps.map((step, idx) => {
               const Icon = step.icon;
               return (
                 <div
                   key={step.title}
-                  className="group relative rounded-3xl bg-white p-6 md:p-8 shadow-lg shadow-slate-200/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-300/50"
+                  className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200/70 md:p-7"
                 >
-                  <div className="absolute -top-4 left-6 md:left-8 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-accent text-white font-bold text-lg shadow-lg">
-                    {idx + 1}
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="flex size-11 items-center justify-center rounded-xl bg-blue-accent/10 text-cyan-700">
+                      <Icon className="size-5" aria-hidden />
+                    </span>
+                    <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                      {step.tag}
+                    </span>
                   </div>
 
-                  <div className="mt-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-accent group-hover:bg-blue-accent/80 group-hover:text-white transition-colors">
-                    <Icon className="h-7 w-7" />
+                  <div className="mt-5 flex items-baseline gap-2">
+                    <span className="font-heading text-sm font-bold text-cyan-700">
+                      0{idx + 1}
+                    </span>
+                    <h3 className="font-heading text-lg font-bold text-slate-900">
+                      {step.title}
+                    </h3>
                   </div>
-
-                  <h3 className="mt-6 text-xl font-bold text-slate-900">
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 text-slate-600 leading-relaxed">
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
                     {step.desc}
                   </p>
-                  <div className="mt-4 text-sm font-semibold text-blue-accent">
-                    {step.timeline}
-                  </div>
                 </div>
               );
             })}
@@ -243,69 +251,79 @@ const BrandAnalysisPage = () => {
         </div>
       </section>
 
-      {/* DELIVERABLES */}
-      <section className="py-20 md:py-32 bg-white">
-        <div className="mx-auto max-w-5xl px-4 md:px-6">
-          <h2 className="font-heading text-3xl md:text-5xl font-bold text-slate-900 text-center">
-            Your <span className="text-blue-accent">Complete</span> Brand
-            Intelligence Package
-          </h2>
-
-          <div className="mt-16 grid gap-4 md:grid-cols-2">
-            {deliverables.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.text}
-                  className="flex items-start gap-3 md:gap-4 rounded-2xl border-2 border-slate-200 bg-slate-50 p-6 transition-all hover:border-blue-accent hover:bg-blue-50/30"
-                >
-                  <Icon className="w-4 h-4 md:h-6 md:w-6 text-blue-accent shrink-0 mt-1" />
-                  <span className="text-slate-700 text-sm md:text-base font-medium">
-                    {item.text}
-                  </span>
-                </div>
-              );
-            })}
+      {/* WHAT'S INCLUDED */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8">
+          <div className="text-center">
+            <SectionEyebrow>What&apos;s included</SectionEyebrow>
+            <h2 className="font-heading mt-3 text-[1.75rem] leading-tight font-bold tracking-tight text-slate-900 sm:text-3xl md:text-[2.6rem]">
+              Clarity for your next move.
+            </h2>
           </div>
 
-          <div className="mt-12 rounded-3xl bg-linear-to-br from-blue-50 to-cyan-50 p-6 md:p-8 border-2 border-blue-200">
-            <div className="flex flex-col md:flex-row items-start gap-4">
-              <Shield className="h-8 w-8 text-blue-accent shrink-0" />
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {deliverables.map((item) => (
+              <div
+                key={item}
+                className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50/50 p-4 transition-colors hover:border-blue-accent/40 hover:bg-blue-accent/5"
+              >
+                <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-blue-accent/10">
+                  <CheckCircle2 className="size-4 text-cyan-700" aria-hidden />
+                </span>
+                <span className="text-sm leading-snug font-medium text-slate-700">
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-col gap-4 rounded-2xl border border-blue-accent/20 bg-blue-accent/5 p-5 sm:flex-row sm:items-center sm:justify-between md:p-6">
+            <div className="flex items-start gap-4">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white text-cyan-700 shadow-sm">
+                <MessageCircle className="size-5" aria-hidden />
+              </span>
               <div>
-                <h3 className="text-lg font-bold text-slate-900">
-                  100% Satisfaction Guarantee
+                <h3 className="font-heading text-base font-bold text-slate-900">
+                  Not sure which path is right?
                 </h3>
-                <p className="mt-2 text-slate-600">
-                  If our analysis doesn't reveal at least 3 actionable insights
-                  that could improve your market position, we'll refund your
-                  investment in full.
+                <p className="mt-1 text-sm leading-relaxed text-slate-600">
+                  Book a free 30-min call — no commitment needed.
                 </p>
               </div>
             </div>
+            <BookCallButton
+              text="Let's talk"
+              className="shrink-0 self-start text-sm sm:self-auto"
+            />
           </div>
         </div>
       </section>
 
-      {/* WHO IT'S FOR */}
-      <section className="py-20 md:py-32 bg-white">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <h2 className="font-heading text-3xl md:text-5xl font-bold text-center">
-            Perfect For Growth-Focused Leaders
-          </h2>
+      {/* WHO WE WORK WITH */}
+      <section className="border-t border-slate-200/70 bg-slate-50 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="text-center">
+            <SectionEyebrow>Who we work with</SectionEyebrow>
+            <h2 className="font-heading mx-auto mt-3 max-w-3xl text-[1.75rem] leading-tight font-bold tracking-tight text-slate-900 sm:text-3xl md:text-[2.6rem]">
+              Growing businesses, startups, and established companies.
+            </h2>
+          </div>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-3">
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
             {idealClients.map((client) => {
               const Icon = client.icon;
               return (
                 <div
                   key={client.title}
-                  className="rounded-3xl bg-white border border-gray-200 p-6 md:p-8 shadow-lg shadow-slate-200/50 transition-all duration-300 hover:shadow-md hover:shadow-slate-300/50"
+                  className="rounded-2xl border border-slate-200 bg-white p-5 transition-colors hover:border-blue-accent/40 md:p-7"
                 >
-                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-accent">
-                    <Icon className="h-7 w-7" />
-                  </div>
-                  <h3 className="mt-6 text-xl font-bold">{client.title}</h3>
-                  <p className="mt-3 text-slate-400 leading-relaxed">
+                  <span className="flex size-11 items-center justify-center rounded-xl bg-blue-accent/10 text-cyan-700">
+                    <Icon className="size-5" aria-hidden />
+                  </span>
+                  <h3 className="font-heading mt-5 text-lg font-bold text-slate-900">
+                    {client.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
                     {client.desc}
                   </p>
                 </div>
@@ -316,37 +334,12 @@ const BrandAnalysisPage = () => {
       </section>
 
       {/* FINAL CTA */}
-      <section className="px-4 md:px-6 pb-8 bg-white">
-        <div className="relative bg-[url('/images/blue-abstract.png')] bg-center bg-contain  rounded-[2rem] md:rounded-[8rem]">
-        {/* Dark overlay */}
-    <div className="absolute inset-0 bg-[#122933]/60 rounded-[2rem] md:rounded-[8rem]" />
-          <div className="py-20 md:py-32 backdrop-blur-xl rounded-[2rem] md:rounded-[8rem]">
-            <div className="mx-auto max-w-4xl px-6 text-center">
-              <h2 className="font-heading text-3xl md:text-5xl font-bold text-white">
-                Ready to Uncover What Your Competitors Already Know?
-              </h2>
-              <p className="mt-6 text-md md:text-lg text-gray-300">
-                Book a 30-minute discovery call to see if brand analysis is
-                right for your business. No obligation, just honest insights.
-              </p>
-
-              <div className="flex justify-center mt-8">
-                <BookCallButton
-                  text="Schedule Discovery Call"
-                  className="group flex items-center gap-2 bg-blue-accent/80 hover:bg-blue-accent/70! text-white! text-md md:text-lg! font-semibold! px-6! md:px-8! hover:px-10!"
-                >
-                  <ArrowRight className="size-5 group-hover:translate-x-3 transition-all duration-200" />
-                </BookCallButton>
-              </div>
-
-              <p className="mt-8 text-xs text-gray-300">
-                Typical investment: ₦150,000+ • Timeline: Scoped to your needs
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+      <DarkCTA
+        title="Let's build a brand that works."
+        description="You don't need everything figured out. Tell us where you are, and we'll map the path forward together."
+        footnote="Starting from ₦150,000 · Scope flexibility · Flexible payment plans"
+      />
+    </div>
   );
 };
 

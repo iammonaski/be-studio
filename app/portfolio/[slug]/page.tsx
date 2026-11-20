@@ -1,10 +1,10 @@
 import { portfolioProjects } from "@/lib/portfolio-config"
-import { Pill } from "@/components/Pill"
+import { SectionEyebrow } from "@/components/services/SectionEyebrow"
+import { DarkCTA } from "@/components/DarkCTA"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, Calendar, User, Tag, CheckCircle2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
 
 export async function generateStaticParams() {
   return portfolioProjects.map((project) => ({
@@ -21,61 +21,67 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       {/* Navigation Header */}
-      <div className="hidden sm:block justify-left sticky top-16 sm:top-20 z-40 w-full bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <Link 
-            href="/portfolio" 
-            className="group flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-accent transition-colors"
+      <div className="sticky top-16 z-40 hidden w-full border-b border-slate-200/70 bg-white/80 backdrop-blur-md sm:top-20 sm:block">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+          <Link
+            href="/portfolio"
+            className="group flex items-center gap-2 text-sm font-medium text-slate-600 transition-colors hover:text-cyan-700"
           >
-            <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" aria-hidden />
             Back to Portfolio
           </Link>
-          <div className="hidden sm:flex items-center gap-4">
-            <span className="text-xs font-bold uppercase tracking-widest text-slate-400">{project.category}</span>
-          </div>
+          <SectionEyebrow>{project.category}</SectionEyebrow>
         </div>
       </div>
 
       {/* Hero Content */}
-      <section className="pt-12 pb-20 md:pt-20 md:pb-32">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-24">
             {/* Left: Project Info */}
             <div>
-              <Pill text={project.category} />
-              <h1 className="font-heading mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.1]">
+              <SectionEyebrow>{project.category}</SectionEyebrow>
+              <h1 className="font-heading mt-6 text-4xl leading-[1.1] font-bold tracking-tight text-slate-900 md:text-5xl lg:text-6xl">
                 {project.title}
               </h1>
-              <p className="mt-8 text-lg md:text-xl text-slate-600 leading-relaxed">
+              <p className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg md:text-xl">
                 {project.longDescription || project.description}
               </p>
 
               {/* Metadata Grid */}
-              <div className="mt-12 grid grid-cols-2 gap-8 border-y border-slate-100 py-10">
+              <div className="mt-10 grid grid-cols-2 gap-8 border-y border-slate-200/70 py-10">
                 <div>
-                  <div className="flex items-center gap-2 text-slate-400 mb-2">
-                    <User size={16} />
-                    <span className="text-xs font-bold uppercase tracking-widest">Client</span>
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="flex size-8 items-center justify-center rounded-lg bg-blue-accent/10 text-cyan-700">
+                      <User size={16} aria-hidden />
+                    </span>
+                    <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-slate-500">Client</span>
                   </div>
-                  <p className="text-slate-900 font-medium">{project.client || "Confidential"}</p>
+                  <p className="font-medium text-slate-900">{project.client || "Confidential"}</p>
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 text-slate-400 mb-2">
-                    <Calendar size={16} />
-                    <span className="text-xs font-bold uppercase tracking-widest">Year</span>
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="flex size-8 items-center justify-center rounded-lg bg-blue-accent/10 text-cyan-700">
+                      <Calendar size={16} aria-hidden />
+                    </span>
+                    <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-slate-500">Year</span>
                   </div>
-                  <p className="text-slate-900 font-medium">{project.year || "2023"}</p>
+                  <p className="font-medium text-slate-900">{project.year || "2023"}</p>
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 text-slate-400 mb-2">
-                    <Tag size={16} />
-                    <span className="text-xs font-bold uppercase tracking-widest">Services</span>
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="flex size-8 items-center justify-center rounded-lg bg-blue-accent/10 text-cyan-700">
+                      <Tag size={16} aria-hidden />
+                    </span>
+                    <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-slate-500">Services</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="text-sm text-slate-600">{tag}</span>
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="rounded-full bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600">
+                        {tag}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -84,27 +90,25 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
             {/* Right: Challenge & Solution */}
             {(project.challenge || project.solution) && (
-              <div className="space-y-12 bg-slate-50 rounded-[2.5rem] p-6 sm:p-8 md:p-12">
+              <div className="space-y-10 rounded-2xl border border-slate-200 bg-slate-50/70 p-6 sm:p-8 md:p-10">
                 {project.challenge && (
                   <div>
-                    <h3 className="text-xl font-semibold text-slate-900 mb-4">The Challenge</h3>
-                    <p className="text-slate-600 leading-relaxed">{project.challenge}</p>
+                    <h2 className="font-heading text-xl font-bold text-slate-900">The Challenge</h2>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-600">{project.challenge}</p>
                   </div>
                 )}
                 {project.solution && (
                   <div>
-                    <h3 className="text-xl font-semibold text-slate-900 mb-4">Our Strategy</h3>
-                    <div className="space-y-4">
-                       <p className="text-slate-600 leading-relaxed">{project.solution}</p>
-                       <ul className="space-y-3">
-                         {project.tags.map(tag => (
-                           <li key={tag} className="flex items-start gap-3 text-sm text-slate-600">
-                             <CheckCircle2 className="w-5 h-5 text-blue-accent shrink-0" />
-                             {tag}
-                           </li>
-                         ))}
-                       </ul>
-                    </div>
+                    <h2 className="font-heading text-xl font-bold text-slate-900">Our Strategy</h2>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-600">{project.solution}</p>
+                    <ul className="mt-5 space-y-3">
+                      {project.tags.map((tag) => (
+                        <li key={tag} className="flex items-start gap-3 text-sm text-slate-600">
+                          <CheckCircle2 className="size-5 shrink-0 text-cyan-700" aria-hidden />
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 )}
               </div>
@@ -114,28 +118,28 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* Visual Gallery */}
-      <section className="bg-slate-50 py-20 md:py-32">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="grid gap-8 md:gap-12">
+      <section className="border-y border-slate-200/70 bg-slate-50 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="grid gap-6 md:gap-8">
             {/* Main Feature Image */}
-            <div className="relative aspect-video rounded-[2.5rem] overflow-hidden shadow-2xl">
-              <Image 
-                src={project.image} 
-                alt={`${project.title} overview`} 
-                fill 
+            <div className="relative aspect-video overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <Image
+                src={project.image}
+                alt={`${project.title} overview`}
+                fill
                 className="object-cover"
               />
             </div>
-            
+
             {/* Secondary Gallery */}
             {project.gallery && project.gallery.length > 0 && (
-              <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+              <div className="grid gap-6 md:grid-cols-2 md:gap-8">
                 {project.gallery.slice(1).map((img, idx) => (
-                  <div key={idx} className="relative aspect-square md:aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-xl">
-                    <Image 
-                      src={img} 
-                      alt={`${project.title} detail ${idx + 1}`} 
-                      fill 
+                  <div key={idx} className="relative aspect-square overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm md:aspect-[4/3]">
+                    <Image
+                      src={img}
+                      alt={`${project.title} detail ${idx + 1}`}
+                      fill
                       className="object-cover"
                     />
                   </div>
@@ -146,23 +150,26 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* Next Project / Footer CTA */}
-      <section className="py-24 md:py-32">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 text-center">
-          <span className="text-xs font-bold uppercase tracking-widest text-blue-accent">Next Project</span>
-          <h2 className="font-heading mt-6 text-3xl md:text-5xl font-semibold tracking-tight text-slate-900">
-            Let's work on your next <br /> big thing together.
-          </h2>
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-             <Button asChild className="rounded-full px-8 py-6 bg-blue-accent hover:bg-blue-600 text-white font-semibold">
-                <Link href="/contact">Start a Conversation</Link>
-             </Button>
-             <Button variant="outline" asChild className="rounded-full px-8 py-6 border-slate-200 hover:bg-slate-50 font-semibold">
-                <Link href="/portfolio">Explore More Work</Link>
-             </Button>
-          </div>
-        </div>
-      </section>
-    </main>
+      {/* Next Project / CTA */}
+      <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-8 sm:pt-24">
+        <SectionEyebrow>Next Project</SectionEyebrow>
+      </div>
+      <DarkCTA
+        title={
+          <>
+            Let&apos;s work on your next <br className="hidden sm:block" /> big thing together.
+          </>
+        }
+        buttonText="Start a Conversation"
+        buttonHref="/contact"
+      >
+        <Link
+          href="/portfolio"
+          className="mt-6 inline-block text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-white hover:underline"
+        >
+          Explore More Work
+        </Link>
+      </DarkCTA>
+    </div>
   )
 }
