@@ -1,115 +1,94 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Check, Mic, Plane, Search, Speaker } from "lucide-react";
-import Image from "next/image";
-import { Pill } from "../Pill";
-
 const steps = [
   {
-    title: "Discover",
-    icon: <Search className="w-6 h-6" />,
+    title: "Understand",
     description:
-      "We start by understanding your business, its audience, market, and existing brand. Through research and analysis, we identify the challenges, opportunities, and areas that need attention.",
+      "Your business, audience, market, and how your brand is perceived today.",
   },
   {
-    title: "Define",
-    icon: <Mic className="w-6 h-6" />,
+    title: "Position",
     description:
-      "With a clearer understanding of the business, we establish the brand's strategic direction. This includes its positioning, messaging, communication, and the overall direction it should take.",
+      "What you should be known for, who you serve, and what sets you apart.",
   },
   {
-    title: "Deliver",
-    icon: <Plane className="w-6 h-6" />,
+    title: "Communicate",
     description:
-      "We translate the agreed direction into practical brand solutions, from visual identity and brand applications to experiences and systems that help the brand remain consistent.",
+      "What your brand says and how it says it, from key messages to tone of voice.",
+  },
+  {
+    title: "Experience",
+    description:
+      "How people encounter your brand, online, in person, and through your service.",
+  },
+  {
+    title: "Express",
+    description:
+      "A visual identity shaped by the strategy, from typography to colour and imagery.",
+  },
+  {
+    title: "Systemize",
+    description:
+      "Guidelines, templates, and tools that keep the brand consistent as you grow.",
   },
 ];
 
 export const Approach = () => {
   return (
-    <section className="relative bg-white" id="approach">
-      <div className="mx-auto flex flex-col lg:flex-row justify-between gap-12 max-w-7xl px-4 lg:px-6 py-6 lg:py-32">
-        {/* Soft background circle for depth */}
-        {/* <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#1F4FD8]/10 blur-3xl pointer-events-none" /> */}
-        {/* <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-[#1F4FD8]/10 blur-3xl pointer-events-none" /> */}
-
-        <div className="flex-1">
-          {/* Header */}
-          <div className="max-w-3xl">
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+    <section
+      id="approach"
+      aria-labelledby="approach-heading"
+      className="scroll-mt-24 bg-background py-20 md:py-28 lg:py-32"
+    >
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-dark-accent/70">
+              How we work
+            </p>
+            <h2
+              id="approach-heading"
+              className="font-heading mt-6 max-w-[14ch] text-3xl font-semibold leading-[1.2] tracking-tight text-balance text-dark-accent md:text-4xl xl:text-[2.75rem]"
             >
-              <Pill text="Our Approach" />
-              
-            </motion.span>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-heading mt-6 text-3xl md:text-4xl font-semibold tracking-tight text-[#0B1C2D] leading-tight"
-            >
-              Strategy before design. <br /> Clarity before growth.
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-6 text-base md:text-lg leading-relaxed text-[#4B5C73]"
-            >
-              Every strong brand starts with understanding. We take the time to understand your business, identify what it needs, establish the right direction, and bring that direction to life through thoughtful branding.
-            </motion.p>
+              Build the brand your business actually needs.
+            </h2>
+            <p className="mt-6 max-w-sm text-sm leading-7 text-slate-600 md:text-base">
+              We start by understanding your business and how it is perceived.
+              That guides what needs to change, from positioning and messaging to
+              identity and the systems that keep it consistent.
+            </p>
+            <div className="mt-8 max-w-sm border-l-2 border-blue-accent pl-4 lg:mt-12">
+              <p className="text-sm font-medium leading-6 text-dark-accent">
+                The scope follows the need.
+              </p>
+              <p className="mt-1 text-sm leading-6 text-slate-600">
+                Not every business needs every part.
+              </p>
+            </div>
           </div>
 
-          {/* Steps */}
-          <div className="mt-16 flex flex-col gap-4">
-            {steps.map((step, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 * idx }}
-                whileHover={{ scale: 1.001 }}
-                className="flex flex-col items-center md:items-start gap-4 p-6 rounded-[2rem] transition-transform bg-white border border-gray-100 shadow-sm hover:shadow-md"
+          <ol
+            aria-label="The BE brand-building method"
+            className="border-t border-dark-accent/15 lg:col-span-7"
+          >
+            {steps.map((step, index) => (
+              <li
+                key={step.title}
+                className="grid grid-cols-[1.75rem_1fr] gap-x-3 border-b border-dark-accent/15 py-6 sm:grid-cols-[1.75rem_8.5rem_1fr] sm:gap-x-4 sm:py-7"
               >
-                {/* Icon */}
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 text-blue-accent/70">
-                  {step.icon}
-                </div>
-
-                {/* Step title */}
-                <h3 className="text-lg font-semibold text-[#0B1C2D]">
+                <span
+                  aria-hidden="true"
+                  className="pt-1 text-xs leading-5 font-medium text-slate-500 tabular-nums"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-base font-semibold leading-7 tracking-tight text-dark-accent">
                   {step.title}
                 </h3>
-
-                {/* Step description */}
-                <p className="text-center md:text-left text-[#4B5C73]">
+                <p className="col-start-2 mt-2 max-w-md text-sm leading-7 text-slate-600 sm:col-start-auto sm:mt-0">
                   {step.description}
                 </p>
-              </motion.div>
+              </li>
             ))}
-          </div>
-        </div>
-
-        {/*Left column Image container */}
-        <div className="flex-1 lg:sticky top-24 self-start w-full ">
-          <div className="relative aspect-4/3 rounded-[2rem] border border-[#0B1C2D]/10 bg-[#F7F9FC] overflow-hidden shadow-sm">
-            <Image
-              src="/images/analysis.png"
-              alt="Brand strategy and analysis visual"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+          </ol>
         </div>
       </div>
     </section>

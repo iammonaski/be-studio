@@ -1,143 +1,264 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { scrollToSection } from "@/utils/scroll-to-section";
-import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
+import { useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
+import {
+  motion,
+  useMotionTemplate,
+  useInView,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from "framer-motion";
+import type { PointerEvent } from "react";
+import { CALENDLY_URL } from "@/lib/calendly";
+import styles from "./Footer.module.css";
 
-export const Footer = () => {
-  const BASE_URL = "https://be-studio.vercel.app";
+const PatternWaves = dynamic(() => import("./PatternWaves"), { ssr: false });
 
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Services", path: "#services" },
-    { name: "Portfolio", path: "/portfolio" },
-    { name: "Approach", path: "#approach" },
-    { name: "Contact", path: "/contact" },
-    { name: "FAQ", path: "#faq" },
-  ];
+function FooterBackground() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isNear = useInView(ref, { margin: "800px", once: true });
+  const reduceMotion = useReducedMotion();
 
   return (
-    <footer className="w-full border-t border-gray-200 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
-          <div className="col-span-2 lg:col-span-2 flex flex-col gap-4 pr-0 lg:pr-8">
-            <div className="flex items-center mb-2 -ml-3">
-              <Link href="/" className="flex items-center">
-                <div className="relative w-12 h-12 md:w-14 md:h-14 ">
-                  <Image
-                    src="/logo_temp.png"
-                    alt="Brand Logo"
-                    sizes="10"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-                {/* <p className="text-blue-accent font-semibold">BE</p> */}
-              </Link>
-              <h2 className="font-heading text-lg font-extrabold tracking-tight text-slate-900">
-                BE Graphic Studio
-              </h2>
-            </div>
-            <p className="-mt-4 text-slate-500 text-sm leading-relaxed max-w-xs">
-              We are a full-service creative agency helping brands grow through
-              strategy, design, and technology.
-            </p>
-            <div className="flex gap-4 mt-6 md:mt-4">
-              <a href="https://www.linkedin.com/company/be-graphic-studio/" target="_blank">
-                <svg width="22px" height="22px" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn icon</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              </a>
-              {/* <a href="https://instagram.com" target="_blank">
-                <Image
-                  src="/images/social/instagram.svg"
-                  alt="Instagram"
-                  width={22}
-                  height={22}
-                />
-              </a>
-              <a href="https://x.com" target="_blank">
-                <Image
-                  src="/images/social/x.svg"
-                  alt="Instagram"
-                  width={22}
-                  height={22}
-                />
-              </a> */}
-            </div>
-          </div>
-          <div className="flex flex-col gap-4">
-            <h4 className="font-bold text-slate-900">Services</h4>
-            {[
-              { name: "Full Brand Build", slug: "full-brand-build" },
-              { name: "Brand Analysis", slug: "brand-analysis" },
-              { name: "Brand Strategy", slug: "brand-strategy" },
-              { name: "Brand Identity System", slug: "brand-identity-system" },
-              { name: "Brand Repositioning", slug: "brand-repositioning" },
-              { name: "Brand Growth Assets", slug: "brand-growth-assets" },
-            ].map((service) => (
-              <Link
-                key={service.slug}
-                className="text-sm text-slate-500 hover:text-blue-accent transition-colors max-w-max"
-                href={`/services/${service.slug}`}
-              >
-                {service.name}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col gap-4 text-left">
-            <h4 className="font-bold text-slate-900">Company</h4>
-            {navLinks.map((link: any) => {
-              const isHash = link.path.startsWith("#");
-              const isHome = link.path === "/";
+    <div ref={ref} aria-hidden="true" className={styles.background}>
+      {isNear && (
+        <PatternWaves
+          preset="silk"
+          color="var(--blue-accent)"
+          backgroundColor="transparent"
+          spacing={10}
+          markSize={0.85}
+          depth={0.8}
+          shine={0.55}
+          contrast={1.1}
+          speed={0.18}
+          scale={1.25}
+          opacity={0.7}
+          fade="bottom"
+          fadeSize={0.65}
+          interactive={false}
+          intro={false}
+          paused={Boolean(reduceMotion)}
+        />
+      )}
+    </div>
+  );
+}
 
-              if (isHash || isHome) {
-                return (
-                  <button
-                    key={link.path}
-                    onClick={() =>
-                      scrollToSection(isHash ? link.path.slice(1) : undefined)
-                    } // remove #
-                    className="relative text-sm text-left max-w-max font-medium tracking-tight text-slate-500 hover:text-primary hover:cursor-pointer"
-                    
-                  >
-                    {link.name}
-                  </button>
-                );
-              } else {
-                return (
-                  <Link
-                    key={link.path}
-                    href={link.path}
-                    className="relative text-sm text-left max-w-max font-medium tracking-tight text-slate-500 hover:text-primary"
-                    
-                  >
+const services = [
+  { name: "Full Brand Build", slug: "full-brand-build" },
+  { name: "Brand Analysis", slug: "brand-analysis" },
+  { name: "Brand Strategy", slug: "brand-strategy" },
+  { name: "Brand Identity System", slug: "brand-identity-system" },
+  { name: "Brand Repositioning", slug: "brand-repositioning" },
+  { name: "Brand Growth Assets", slug: "brand-growth-assets" },
+];
+
+const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/#services" },
+  { name: "Portfolio", path: "/portfolio" },
+  { name: "Approach", path: "/#approach" },
+  { name: "Contact", path: "/contact" },
+  { name: "FAQ", path: "/#faq" },
+];
+
+function MagneticCallLink() {
+  const reduceMotion = useReducedMotion();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 240, damping: 22 });
+  const springY = useSpring(y, { stiffness: 240, damping: 22 });
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (reduceMotion || event.pointerType === "touch") return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    x.set((event.clientX - bounds.left - bounds.width / 2) * 0.1);
+    y.set((event.clientY - bounds.top - bounds.height / 2) * 0.1);
+  };
+
+  const reset = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <div
+      className={styles.callTarget}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={reset}
+      onPointerCancel={reset}
+      onBlur={reset}
+    >
+      <motion.a
+        href={CALENDLY_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.callLink}
+        style={{ x: reduceMotion ? 0 : springX, y: reduceMotion ? 0 : springY }}
+      >
+        <ArrowUpRight aria-hidden="true" strokeWidth={1.5} />
+        <span>Book a call</span>
+        <span className="sr-only"> (opens in a new tab)</span>
+      </motion.a>
+    </div>
+  );
+}
+
+function FooterWordmark() {
+  const reduceMotion = useReducedMotion();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const opacity = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 180, damping: 28 });
+  const springY = useSpring(y, { stiffness: 180, damping: 28 });
+  const springOpacity = useSpring(opacity, { stiffness: 180, damping: 28 });
+  const mask = useMotionTemplate`radial-gradient(240px circle at ${springX}px ${springY}px, black 0%, transparent 100%)`;
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (reduceMotion || event.pointerType === "touch") return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    x.set(event.clientX - bounds.left);
+    y.set(event.clientY - bounds.top);
+    opacity.set(1);
+  };
+
+  return (
+    <div
+      aria-hidden="true"
+      className={styles.wordmark}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={() => opacity.set(0)}
+      onPointerCancel={() => opacity.set(0)}
+    >
+      <svg viewBox="0 0 1000 155" focusable="false" className={styles.wordmarkBase}>
+        <text x="0" y="125" textLength="1000" lengthAdjust="spacingAndGlyphs">
+          BE STUDIO
+        </text>
+      </svg>
+      <motion.div
+        className={styles.wordmarkLight}
+        style={{
+          opacity: reduceMotion ? 0 : springOpacity,
+          maskImage: mask,
+          WebkitMaskImage: mask,
+        }}
+      >
+        <svg viewBox="0 0 1000 155" focusable="false">
+          <text x="0" y="125" textLength="1000" lengthAdjust="spacingAndGlyphs">
+            BE STUDIO
+          </text>
+        </svg>
+      </motion.div>
+    </div>
+  );
+}
+
+export const Footer = () => {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <footer className={styles.footer}>
+      <FooterBackground />
+      <div className={styles.container}>
+        <motion.div
+          className={styles.invitation}
+          initial={false}
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.35 }}
+        >
+          <div>
+            <p className={styles.eyebrow}>Have something in mind?</p>
+            <h2 className={styles.headline}>
+              <motion.span
+                className={styles.headlineText}
+                variants={{ visible: { backgroundPosition: ["100% 50%", "0% 50%"] } }}
+                transition={{ duration: reduceMotion ? 0 : 1.8, ease: "easeInOut" }}
+              >
+                Let&apos;s build<br />what&apos;s next.
+              </motion.span>
+            </h2>
+          </div>
+          <MagneticCallLink />
+        </motion.div>
+
+        <div className={styles.directory}>
+          <div className={styles.brand}>
+            <Link href="/" className={styles.brandName}>
+              BE Graphic Studio<span aria-hidden="true">.</span>
+            </Link>
+            <p>Strategy, identity, and brand systems for growing businesses.</p>
+            <Link href="/contact" className={styles.textLink}>
+              Start a conversation <ArrowUpRight aria-hidden="true" size={15} />
+            </Link>
+          </div>
+
+          <nav aria-label="Footer services">
+            <h3 className={styles.columnHeading}>Services</h3>
+            <ul className={styles.linkList}>
+              {services.map((service) => (
+                <li key={service.slug}>
+                  <Link className={styles.textLink} href={`/services/${service.slug}`}>
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label="Footer navigation">
+            <h3 className={styles.columnHeading}>Explore</h3>
+            <ul className={styles.linkList}>
+              {navLinks.map((link) => (
+                <li key={link.path}>
+                  <Link href={link.path} className={styles.textLink}>
                     {link.name}
                   </Link>
-                );
-              }
-            })}
-          </div>
-          <div className="flex flex-col gap-4">
-            <h4 className="font-bold text-slate-900">Legal</h4>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-            <a
-              className="text-sm text-slate-500 hover:text-primary transition-colors"
-              href="#"
-            >
-              Terms of Service
-            </a>
+          <div>
+            <h3 className={styles.columnHeading}>Connect</h3>
+            <ul className={styles.linkList}>
+              <li>
+                <a
+                  href="https://www.linkedin.com/company/be-graphic-studio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.textLink}
+                >
+                  LinkedIn <ArrowUpRight aria-hidden="true" size={14} />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
+              <li>
+                <Link href="/contact" className={styles.textLink}>Get in touch</Link>
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-          <p className="font-heading text-slate-400 text-sm">
-            &copy; {new Date().getFullYear()} BE Graphic Studio. All rights
-            reserved.
+
+        <FooterWordmark />
+
+        <div className={styles.bottomBar}>
+          <p>&copy; {new Date().getFullYear()} BE Graphic Studio. All rights reserved.</p>
+          <p>
+            Design &amp; development by{" "}
+            <a
+              href="https://github.com/skidev101"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.creditLink}
+            >
+              Monaski<span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </p>
-          <div className="flex gap-1">
-            <p className="text-slate-400 text-sm">Designed and Developed by</p>
-            <a href="https://github.com/skidev101" target="_blank" rel="noopener noreferrer" className="hover:text-blue-accent text-slate-500 text-sm">Monaski</a>
-          </div>
         </div>
       </div>
     </footer>
