@@ -130,6 +130,7 @@ export function Header() {
 
               <SheetContent
                 side="right"
+                showCloseButton={false}
                 className="w-full max-w-sm bg-white p-0 h-dvh border-l border-slate-100"
                 aria-describedby={undefined}
               >
