@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SectionEyebrow } from "@/components/services/SectionEyebrow";
 
 export const Clients = () => {
   const clientLogos = [
@@ -14,12 +15,13 @@ export const Clients = () => {
   return (
     <section className="bg-white py-10 lg:py-28">
       <div className="mx-auto max-w-6xl px-6 text-center">
-        <h1 className="font-heading text-center mt-6 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
+        <SectionEyebrow className="mb-3 block">Who we work with</SectionEyebrow>
+        <h2 className="font-heading text-center text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
           Trusted by growing teams and established brands
-        </h1>
+        </h2>
 
-        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[#4B5C73]">
-          We've partnered with teams across industries to build brands that are
+        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-600">
+          We&apos;ve partnered with teams across industries to build brands that are
           clear, consistent, and built for growth.
         </p>
 

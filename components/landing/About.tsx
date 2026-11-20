@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SectionEyebrow } from "@/components/services/SectionEyebrow";
 
 const pillars = [
   {
@@ -38,8 +39,8 @@ export const About = () => {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-blue-accent mb-4">Our Approach</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold leading-tight text-[#0B1C2D]">
+            <SectionEyebrow className="mb-4 block">Our Approach</SectionEyebrow>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold leading-tight text-slate-900">
               Branding goes beyond how your business looks.
             </h2>
           </motion.div>
@@ -51,10 +52,10 @@ export const About = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:pb-2"
           >
-            <p className="text-sm md:text-base text-[#4B5C73] leading-relaxed">
+            <p className="text-sm md:text-base text-slate-600 leading-relaxed">
               At BE Graphic Studio, we believe building a strong brand takes more than good design. It requires a clear understanding of your business, a defined position, purposeful communication, and a visual identity that brings everything together.
             </p>
-            <p className="mt-4 text-sm md:text-base text-[#4B5C73] leading-relaxed">
+            <p className="mt-4 text-sm md:text-base text-slate-600 leading-relaxed">
               We work with growing businesses to bring these elements together — making quality branding accessible and helping you build a brand with clarity, intention, and room to grow.
             </p>
           </motion.div>
@@ -66,13 +67,13 @@ export const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mt-16 grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-slate-200 border border-slate-200 rounded-3xl overflow-hidden bg-white"
+          className="mt-16 grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-slate-200 border border-slate-200 rounded-2xl overflow-hidden bg-white"
         >
           {pillars.map((p) => (
             <div key={p.num} className="p-7 md:p-8">
               <span className="text-[11px] font-semibold tabular-nums tracking-widest text-slate-400">{p.num}</span>
-              <h3 className="mt-3 text-base font-bold text-[#0B1C2D]">{p.title}</h3>
-              <p className="mt-2 text-sm text-[#4B5C73] leading-relaxed">{p.desc}</p>
+              <h3 className="mt-3 text-base font-bold text-slate-900">{p.title}</h3>
+              <p className="mt-2 text-sm text-slate-600 leading-relaxed">{p.desc}</p>
             </div>
           ))}
         </motion.div>

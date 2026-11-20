@@ -3,11 +3,9 @@
 import { useState } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, Search } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { portfolioProjects, Project } from "@/lib/portfolio-config"
-import { Button } from "../ui/button"
-
+import { portfolioProjects } from "@/lib/portfolio-config"
 import Link from "next/link"
 
 const categories = ["All", ...new Set(portfolioProjects.map(p => p.category))]
@@ -15,26 +13,26 @@ const categories = ["All", ...new Set(portfolioProjects.map(p => p.category))]
 export function PortfolioGrid() {
   const [activeCategory, setActiveCategory] = useState("All")
 
-  const filteredProjects = activeCategory === "All" 
-    ? portfolioProjects 
+  const filteredProjects = activeCategory === "All"
+    ? portfolioProjects
     : portfolioProjects.filter(p => p.category === activeCategory)
 
   return (
-    <section className="relative bg-white py-20 md:py-32 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        
+    <section className="relative overflow-hidden border-y border-slate-200/70 bg-slate-50 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+
         {/* Category Filter */}
-        <div className="relative mb-12 md:mb-20">
-          <div className="flex items-center gap-3 overflow-x-auto pb-4 md:pb-0 no-scrollbar md:flex-wrap md:justify-center">
+        <div className="relative mb-10 md:mb-14">
+          <div className="no-scrollbar flex items-center gap-3 overflow-x-auto pb-4 md:flex-wrap md:justify-center md:pb-0">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
                 className={cn(
-                  "whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 hover:cursor-pointer",
+                  "cursor-pointer whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300",
                   activeCategory === category
-                    ? "bg-blue-accent text-white shadow-lg shadow-blue-200"
-                    : "bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                    ? "bg-blue-accent text-white shadow-lg shadow-blue-accent/20"
+                    : "border border-slate-200 bg-white text-slate-600 hover:border-blue-accent/40 hover:text-slate-900"
                 )}
               >
                 {category}
@@ -44,9 +42,9 @@ export function PortfolioGrid() {
         </div>
 
         {/* Projects Grid */}
-        <motion.div 
+        <motion.div
           layout
-          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, i) => (
@@ -60,7 +58,7 @@ export function PortfolioGrid() {
               >
                 <Link
                   href={`/portfolio/${project.slug}`}
-                  className="group relative flex flex-col rounded-[2rem] overflow-hidden border border-slate-100 bg-white shadow-sm hover:shadow-xl hover:border-blue-100 transition-all duration-500 h-full"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 hover:border-blue-accent/40 hover:shadow-lg hover:shadow-slate-200/70"
                 >
                   {/* Image Container */}
                   <div className="relative aspect-[4/3] overflow-hidden">
@@ -70,29 +68,29 @@ export function PortfolioGrid() {
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    
+                    <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden />
+
                     {/* Category Badge (Floating) */}
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-widest text-blue-accent shadow-sm">
+                      <span className="rounded-full bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-cyan-700 shadow-sm backdrop-blur-sm">
                         {project.category}
                       </span>
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 p-7 md:p-8">
-                    <h3 className="text-xl md:text-2xl font-semibold text-slate-900 tracking-tight group-hover:text-blue-accent transition-colors">
+                  <div className="flex-1 p-6 md:p-7">
+                    <h3 className="font-heading text-xl font-bold tracking-tight text-slate-900 transition-colors group-hover:text-cyan-700 md:text-2xl">
                       {project.title}
                     </h3>
-                    
-                    <p className="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-2">
+
+                    <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-600">
                       {project.description}
                     </p>
 
                     <div className="mt-6 flex flex-wrap gap-2">
                       {project.tags.slice(0, 3).map(tag => (
-                        <span key={tag} className="text-[11px] font-medium text-slate-400 bg-slate-50 px-2 py-0.5 rounded">
+                        <span key={tag} className="rounded-full bg-slate-50 px-2.5 py-1 text-[11px] font-medium text-slate-600">
                           #{tag}
                         </span>
                       ))}
@@ -100,8 +98,8 @@ export function PortfolioGrid() {
                   </div>
 
                   {/* Hover Action */}
-                  <div className="absolute bottom-6 right-8 opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
-                    <div className="w-10 h-10 rounded-full bg-blue-accent text-white flex items-center justify-center shadow-lg">
+                  <div className="absolute right-6 bottom-6 translate-x-4 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100" aria-hidden>
+                    <div className="flex size-10 items-center justify-center rounded-full bg-blue-accent text-white shadow-lg shadow-blue-accent/20">
                       <ArrowRight size={20} />
                     </div>
                   </div>
@@ -112,7 +110,7 @@ export function PortfolioGrid() {
         </motion.div>
 
         {filteredProjects.length === 0 && (
-          <div className="text-center py-20">
+          <div className="py-20 text-center">
             <p className="text-slate-500">No projects found in this category.</p>
           </div>
         )}

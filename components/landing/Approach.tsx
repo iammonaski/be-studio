@@ -1,3 +1,5 @@
+import { SectionEyebrow } from "@/components/services/SectionEyebrow";
+
 const steps = [
   {
     title: "Understand",
@@ -41,12 +43,10 @@ export const Approach = () => {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-dark-accent/70">
-              How we work
-            </p>
+            <SectionEyebrow className="mb-4 block">How we work</SectionEyebrow>
             <h2
               id="approach-heading"
-              className="font-heading mt-6 max-w-[14ch] text-3xl font-semibold leading-[1.2] tracking-tight text-balance text-dark-accent md:text-4xl xl:text-[2.75rem]"
+              className="font-heading mt-3 max-w-[14ch] text-3xl font-semibold leading-[1.2] tracking-tight text-balance text-slate-900 md:text-4xl xl:text-[2.75rem]"
             >
               Build the brand your business actually needs.
             </h2>
@@ -56,7 +56,7 @@ export const Approach = () => {
               identity and the systems that keep it consistent.
             </p>
             <div className="mt-8 max-w-sm border-l-2 border-blue-accent pl-4 lg:mt-12">
-              <p className="text-sm font-medium leading-6 text-dark-accent">
+              <p className="text-sm font-medium leading-6 text-slate-900">
                 The scope follows the need.
               </p>
               <p className="mt-1 text-sm leading-6 text-slate-600">
@@ -80,7 +80,7 @@ export const Approach = () => {
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="text-base font-semibold leading-7 tracking-tight text-dark-accent">
+                <h3 className="text-base font-semibold leading-7 tracking-tight text-slate-900">
                   {step.title}
                 </h3>
                 <p className="col-start-2 mt-2 max-w-md text-sm leading-7 text-slate-600 sm:col-start-auto sm:mt-0">

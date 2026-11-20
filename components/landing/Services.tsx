@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { SectionEyebrow } from "@/components/services/SectionEyebrow"
 import { motion } from "framer-motion"
 import { ArrowRight, BarChart2, Compass, Layers, RefreshCw, TrendingUp, Zap } from "lucide-react"
 
@@ -111,11 +112,11 @@ export function Services() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <p className="text-xs font-semibold uppercase tracking-widest text-blue-accent mb-4">Core Services</p>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold leading-tight text-[#0B1C2D]">
+          <SectionEyebrow className="mb-4 block">Core Services</SectionEyebrow>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold leading-tight text-slate-900">
             Branding built around<br className="hidden md:block" /> what you need.
           </h2>
-          <p className="mt-5 text-sm md:text-base text-[#4B5C73] leading-relaxed max-w-xl">
+          <p className="mt-5 text-sm md:text-base text-slate-600 leading-relaxed max-w-xl">
             From understanding your business to building its identity and scaling its presence — every service we offer is designed to work together.
           </p>
         </motion.div>
@@ -129,7 +130,7 @@ export function Services() {
           className="mt-14"
         >
           <Link href={`/services/${featured.slug}`} className="group block">
-            <div className="relative grid grid-cols-1 lg:grid-cols-5 gap-0 rounded-3xl border border-slate-200 bg-[#0B1C2D] overflow-hidden transition-all duration-300 hover:border-slate-300">
+            <div className="relative grid grid-cols-1 lg:grid-cols-5 gap-0 rounded-2xl border border-slate-200 bg-dark-accent overflow-hidden transition-all duration-300 hover:border-slate-300">
               {/* Left */}
               <div className="lg:col-span-3 p-8 md:p-10 flex flex-col justify-between">
                 <div>
@@ -152,7 +153,7 @@ export function Services() {
               </div>
               {/* Right */}
               <div className="lg:col-span-2 border-t lg:border-t-0 lg:border-l border-white/10 p-8 md:p-10 bg-white/5 flex flex-col justify-center">
-                <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-500 mb-5">What's included</p>
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-500 mb-5">What&apos;s included</p>
                 <ul className="space-y-4">
                   {featured.items.map((item, j) => (
                     <li key={j} className="flex items-start gap-3 text-sm text-slate-300">
@@ -178,25 +179,25 @@ export function Services() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: i * 0.07 }}
               >
-                <Link href={`/services/${service.slug}`} className="group flex flex-col h-full rounded-3xl border border-slate-200 bg-white p-7 md:p-8 transition-all duration-300 hover:border-[#0B1C2D]">
+                <Link href={`/services/${service.slug}`} className="group flex flex-col h-full rounded-2xl border border-slate-200 bg-white p-7 md:p-8 transition-all duration-300 hover:border-blue-accent/40">
                   <div className="flex items-start justify-between gap-4 mb-6">
-                    <div className="h-10 w-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-[#0B1C2D] group-hover:border-[#0B1C2D]">
-                      <Icon className="h-4.5 w-4.5 text-blue-accent transition-colors duration-300 group-hover:text-white" strokeWidth={1.75} />
+                    <div className="h-10 w-10 rounded-xl bg-blue-accent/10 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-blue-accent/20">
+                      <Icon className="h-4.5 w-4.5 text-cyan-700 transition-colors duration-300" strokeWidth={1.75} />
                     </div>
                     <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 pt-1">{service.tagline}</span>
                   </div>
 
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-[#0B1C2D] leading-snug">
+                    <h3 className="font-heading text-lg font-bold text-slate-900 leading-snug">
                       {service.title}
                     </h3>
-                    <p className="mt-3 text-sm text-[#4B5C73] leading-relaxed">
+                    <p className="mt-3 text-sm text-slate-600 leading-relaxed">
                       {service.description}
                     </p>
                     <ul className="mt-5 space-y-2">
                       {service.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2.5 text-xs text-[#4B5C73]">
-                          <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#0B1C2D]/30 transition-colors duration-300 group-hover:bg-[#0B1C2D]" />
+                        <li key={item} className="flex items-start gap-2.5 text-xs text-slate-600">
+                          <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-blue-accent/40 transition-colors duration-300 group-hover:bg-blue-accent" />
                           {item}
                         </li>
                       ))}
@@ -204,10 +205,10 @@ export function Services() {
                   </div>
 
                   <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#0B1C2D]">
+                    <span className="text-xs font-semibold text-slate-900">
                       Explore service
                     </span>
-                    <ArrowRight className="h-4 w-4 text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#0B1C2D]" />
+                    <ArrowRight className="h-4 w-4 text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-blue-accent" />
                   </div>
                 </Link>
               </motion.div>

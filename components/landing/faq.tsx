@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
+import { SectionEyebrow } from "@/components/services/SectionEyebrow";
 import { BookCallButton } from "../BookCallButton";
 
 const faqs = [
@@ -46,12 +47,12 @@ export default function Faq() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-2 lg:sticky lg:top-28"
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-blue-accent mb-4">FAQ</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold leading-tight text-[#0B1C2D]">
+            <SectionEyebrow className="mb-4 block">FAQ</SectionEyebrow>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold leading-tight text-slate-900">
               Common questions
             </h2>
-            <p className="mt-5 text-sm md:text-base text-[#4B5C73] leading-relaxed">
-              Everything you need to know about working with BE. Can't find an answer?
+            <p className="mt-5 text-sm md:text-base text-slate-600 leading-relaxed">
+              Everything you need to know about working with BE. Can&apos;t find an answer?
             </p>
             <div className="mt-6">
               <BookCallButton text="Ask us directly" className="text-sm" />
@@ -83,13 +84,13 @@ export default function Faq() {
                       <span className="mt-0.5 text-[11px] font-semibold tabular-nums text-slate-400 tracking-widest shrink-0">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="text-base font-semibold text-[#0B1C2D] group-hover:text-blue-accent transition-colors">
+                      <span className="text-base font-semibold text-slate-900 group-hover:text-cyan-700 transition-colors">
                         {faq.q}
                       </span>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="pb-6 pl-9">
-                    <p className="text-sm leading-relaxed text-[#4B5C73]">{faq.a}</p>
+                    <p className="text-sm leading-relaxed text-slate-600">{faq.a}</p>
                   </AccordionContent>
                 </AccordionItem>
               ))}
